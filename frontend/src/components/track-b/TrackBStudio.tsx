@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
   Satellite,
-  ShieldAlert,
   Bot,
   Layers,
   Sparkles,
@@ -242,24 +241,6 @@ export default function TrackBStudio({ embedded = false, onSwitchMode }: TrackBS
         </header>
       )}
 
-      {/* Educational Disclaimer Banner */}
-      <div className="bg-amber-950/40 border-b border-amber-900/60 px-6 py-2 text-[11px] text-amber-300 flex flex-wrap items-center justify-between gap-2 shrink-0">
-        <div className="flex items-center gap-2">
-          <ShieldAlert className="w-3.5 h-3.5 shrink-0 text-amber-400" />
-          <span>
-            <strong>EDUCATIONAL PROTOTYPE:</strong> Post-event assessment system adhering strictly to pre-event OSM and same-track SAR baselines. Does not prove structural bridge destruction or provide minutes-ahead evacuation warnings.
-          </span>
-        </div>
-        {embedded && runStatus && (
-          <div className="flex items-center gap-2 px-2.5 py-0.5 rounded bg-slate-900/90 border border-slate-800 text-slate-300 font-mono text-[11px] shrink-0">
-            <span className="text-slate-500">Active Run:</span>
-            <span className="text-sky-300 font-semibold">{runStatus.run_id}</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-400">Stage:</span>
-            <span className="text-amber-300 font-medium">{runStatus.current_stage}</span>
-          </div>
-        )}
-      </div>
 
       {/* Main Workspace Layout */}
       <div className="flex-1 p-4 grid grid-cols-12 gap-4 max-w-[1700px] w-full mx-auto">
