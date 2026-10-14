@@ -98,12 +98,9 @@ backend/data/track_b/jobs.db-journal
 *.geojson
 
 # Allow essential project datasets and examples
-!frontend/public/data/
-!frontend/public/data/*.tif
-!frontend/public/data/*.geojson
-!frontend/public/data/*.png
+!frontend/public/data/**
 !backend/data/dam.geojson
-!examples/track_b/*.geojson
+!examples/track_b/**
 
 # TypeScript build info
 *.tsbuildinfo

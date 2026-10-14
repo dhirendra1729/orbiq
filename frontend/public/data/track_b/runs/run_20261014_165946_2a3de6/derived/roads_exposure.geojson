@@ -1,0 +1,77 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.13984936603576,
+            27.99999621398887
+          ],
+          [
+            85.19992726194641,
+            27.99999621398887
+          ],
+          [
+            85.26000515785705,
+            27.99999621398887
+          ]
+        ]
+      },
+      "properties": {
+        "id": "way_primary_1",
+        "name": "Trishuli Highway",
+        "highway": "primary",
+        "is_bridge": false,
+        "length_m": 11818.59,
+        "water_overlap_m": 0.0,
+        "debris_overlap_m": 1200.13,
+        "exposure_status": "exposed",
+        "blocked_optimistic": true,
+        "blocked_precautionary": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.19992726194641,
+            27.969996213988868
+          ],
+          [
+            85.19992726194641,
+            27.99999621398887
+          ],
+          [
+            85.19992726194641,
+            28.02999621398887
+          ]
+        ]
+      },
+      "properties": {
+        "id": "way_bridge_crossing",
+        "name": "Trishuli River Bridge",
+        "highway": "secondary",
+        "is_bridge": true,
+        "length_m": 6649.08,
+        "water_overlap_m": 0.0,
+        "debris_overlap_m": 1191.9,
+        "exposure_status": "exposed",
+        "blocked_optimistic": false,
+        "blocked_precautionary": true
+      }
+    }
+  ],
+  "summary": {
+    "total_ways_evaluated": 2,
+    "total_network_length_km": 18.47,
+    "exposed_ways_count": 2,
+    "water_exposed_length_km": 0.0,
+    "debris_exposed_length_km": 2.39,
+    "total_exposed_length_km": 2.39
+  }
+}

@@ -57,7 +57,10 @@ export default function TrackBStudio({ embedded = false, onSwitchMode }: TrackBS
   useEffect(() => {
     const loadInitialCaseStudy = async () => {
       try {
-        const res = await fetch("/api/track-b/runs/run_20261014_165946_2a3de6");
+        let res = await fetch("/api/track-b/runs/run_20261014_165946_2a3de6");
+        if (!res.ok) {
+          res = await fetch("/data/track_b/runs/run_20261014_165946_2a3de6/status.json");
+        }
         if (res.ok) {
           const data = await res.json();
           if (data && (data.status === "completed" || data.status === "reporting")) {
@@ -97,30 +100,36 @@ export default function TrackBStudio({ embedded = false, onSwitchMode }: TrackBS
     return () => clearInterval(interval);
   }, [currentRunId, isRunning]);
 
+  const fetchLayerFile = async (runId: string, filename: string) => {
+    try {
+      let res = await fetch(`/api/track-b/runs/${runId}/exports/${filename}`);
+      if (!res.ok) {
+        res = await fetch(`/data/track_b/runs/${runId}/derived/${filename}`);
+      }
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (e) {
+      console.warn(`Failed fetching ${filename}:`, e);
+    }
+    return null;
+  };
+
   const fetchLayers = async (runId: string) => {
     try {
-      // Inundation GeoJSON
-      const rWater = await fetch(`/api/track-b/runs/${runId}/exports/s1_inundation.geojson`);
-      if (rWater.ok) setInundationData(await rWater.json());
+      const [water, debris, bldg, road, acc] = await Promise.all([
+        fetchLayerFile(runId, "s1_inundation.geojson"),
+        fetchLayerFile(runId, "s2_candidate_debris.geojson"),
+        fetchLayerFile(runId, "buildings_exposure.geojson"),
+        fetchLayerFile(runId, "roads_exposure.geojson"),
+        fetchLayerFile(runId, "settlement_access.json")
+      ]);
 
-      // Debris GeoJSON
-      const rDebris = await fetch(`/api/track-b/runs/${runId}/exports/s2_candidate_debris.geojson`);
-      if (rDebris.ok) setDebrisData(await rDebris.json());
-
-      // Buildings GeoJSON
-      const rBldg = await fetch(`/api/track-b/runs/${runId}/exports/buildings_exposure.geojson`);
-      if (rBldg.ok) setBuildingsData(await rBldg.json());
-
-      // Roads GeoJSON
-      const rRoad = await fetch(`/api/track-b/runs/${runId}/exports/roads_exposure.geojson`);
-      if (rRoad.ok) setRoadsData(await rRoad.json());
-
-      // Settlement Access JSON
-      const rAcc = await fetch(`/api/track-b/runs/${runId}/exports/settlement_access.json`);
-      if (rAcc.ok) {
-        const acc = await rAcc.json();
-        setSettlementsData(acc.settlements || []);
-      }
+      if (water) setInundationData(water);
+      if (debris) setDebrisData(debris);
+      if (bldg) setBuildingsData(bldg);
+      if (road) setRoadsData(road);
+      if (acc && acc.settlements) setSettlementsData(acc.settlements);
     } catch (e) {
       console.warn("Could not load all layers:", e);
     }

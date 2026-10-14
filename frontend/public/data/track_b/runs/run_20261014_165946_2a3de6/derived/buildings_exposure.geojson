@@ -1,0 +1,53 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.20092726194642,
+              27.99999621398887
+            ],
+            [
+              85.20192726194641,
+              27.99999621398887
+            ],
+            [
+              85.20192726194641,
+              28.00099621398887
+            ],
+            [
+              85.20092726194642,
+              28.00099621398887
+            ],
+            [
+              85.20092726194642,
+              27.99999621398887
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "bldg_1",
+        "name": "Health Post",
+        "exposure_class": "no_mapped_overlap",
+        "footprint_area_m2": 10900.06,
+        "water_overlap_m2": 0.0,
+        "debris_overlap_m2": 0.0,
+        "overlap_fraction": 0.0,
+        "amenity": ""
+      }
+    }
+  ],
+  "summary": {
+    "total_buildings": 1,
+    "exposed_water_count": 0,
+    "exposed_debris_count": 0,
+    "exposed_mixed_count": 0,
+    "total_exposed_count": 0,
+    "total_exposed_footprint_m2": 0.0
+  }
+}
