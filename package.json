@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Orbiq: Multi-Sensor Satellite Flood Damage Mapping, Rescue Access Intelligence & Hydrodynamic Decision Studio",
   "scripts": {
-    "start": "./start.sh",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend start",
     "dev": "./start.sh",
     "test": "backend/.venv/bin/python backend/tests/test_sih26161.py"
   }

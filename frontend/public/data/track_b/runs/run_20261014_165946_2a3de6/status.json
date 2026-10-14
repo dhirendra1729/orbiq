@@ -1,0 +1,176 @@
+{
+  "run_id": "run_20261014_165946_2a3de6",
+  "current_stage": "reporting",
+  "status": "completed",
+  "request": {
+    "aoi": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            85.12,
+            27.92
+          ],
+          [
+            85.28,
+            27.92
+          ],
+          [
+            85.28,
+            28.08
+          ],
+          [
+            85.12,
+            28.08
+          ],
+          [
+            85.12,
+            27.92
+          ]
+        ]
+      ]
+    },
+    "event_date": "2026-08-26",
+    "event_timezone": "Asia/Kathmandu",
+    "event_time": null,
+    "pre_search_days": 36,
+    "post_search_days": 24,
+    "pair_interval_days": 12,
+    "analysis_resolution_m": 20.0,
+    "osm_snapshot_time": null,
+    "routing_mode": "motor_vehicle",
+    "graph_context_buffer_m": 15000.0,
+    "copilot_enabled": true,
+    "segmentation_enabled": false,
+    "downstream_bonus_enabled": true
+  },
+  "grid": {
+    "crs": "EPSG:32645",
+    "utm_zone": 45,
+    "resolution_m": 20.0,
+    "bounds_projected": [
+      314980.0,
+      3089520.0,
+      331000.0,
+      3107500.0
+    ],
+    "bounds_wgs84": [
+      85.11984936603577,
+      27.917814727220488,
+      85.28000515785705,
+      28.08217770075725
+    ],
+    "width": 801,
+    "height": 899,
+    "transform": [
+      20.0,
+      0.0,
+      314980.0,
+      0.0,
+      -20.0,
+      3107500.0
+    ]
+  },
+  "stages": {
+    "queued": {
+      "stage": "queued",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:46.335592+00:00",
+      "duration_sec": null,
+      "message": null,
+      "artifacts": []
+    },
+    "discovering": {
+      "stage": "discovering",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:52.636703+00:00",
+      "duration_sec": null,
+      "message": "Discovered 10 S1 pairs, 4 pre S2, 1 post S2.",
+      "artifacts": []
+    },
+    "acquiring": {
+      "stage": "acquiring",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:53.092502+00:00",
+      "duration_sec": null,
+      "message": "Grid configured (801x899 px, EPSG:32645). DEM acquired.",
+      "artifacts": []
+    },
+    "preprocessing": {
+      "stage": "preprocessing",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:53.114536+00:00",
+      "duration_sec": null,
+      "message": "Terrain uncertainty calculated (582498 slope-masked pixels).",
+      "artifacts": []
+    },
+    "mapping": {
+      "stage": "mapping",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:55.366420+00:00",
+      "duration_sec": null,
+      "message": "Hazard mapped: 0.72 km² flood, 71.29 km² candidate debris.",
+      "artifacts": []
+    },
+    "historical_assets": {
+      "stage": "historical_assets",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:58.985845+00:00",
+      "duration_sec": null,
+      "message": "Extracted 2 roads, 1 buildings, 2 settlements.",
+      "artifacts": []
+    },
+    "exposure": {
+      "stage": "exposure",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:59.045805+00:00",
+      "duration_sec": null,
+      "message": "Exposed: 0 buildings, 2.39 km roads.",
+      "artifacts": []
+    },
+    "accessibility": {
+      "stage": "accessibility",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:59.052613+00:00",
+      "duration_sec": null,
+      "message": "Analyzed 2 settlements (0 newly cut off).",
+      "artifacts": []
+    },
+    "facts": {
+      "stage": "facts",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:59.056214+00:00",
+      "duration_sec": null,
+      "message": "Compiled 7 verifiable facts.",
+      "artifacts": []
+    },
+    "reporting": {
+      "stage": "reporting",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-14T16:59:59.067623+00:00",
+      "duration_sec": null,
+      "message": "Reports generated. Prediction locked (hash: 77de531347a9).",
+      "artifacts": []
+    }
+  },
+  "created_at": "2026-10-14T16:59:46.335592+00:00",
+  "updated_at": "2026-10-14T16:59:59.070223+00:00",
+  "completed_at": "2026-10-14T16:59:59.070187+00:00",
+  "warnings": [
+    "Direct SAR asset download access denied or requester-pays (Access Denied); using DEM-conditioned backscatter."
+  ],
+  "error": null,
+  "evidence_coverage": {},
+  "prediction_frozen": true,
+  "freeze_hash": "77de531347a94ac5b7eb5468c788e784c27eae83ff5fa7fc5f60abb95edc40ed"
+}

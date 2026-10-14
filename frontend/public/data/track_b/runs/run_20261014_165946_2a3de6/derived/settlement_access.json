@@ -1,0 +1,51 @@
+{
+  "scenario": "precautionary",
+  "summary": {
+    "access_retained": 1,
+    "rerouted": 0,
+    "access_lost_to_baseline_destination": 0,
+    "newly_cut_off": 0,
+    "already_disconnected": 1,
+    "unsnapped": 0,
+    "destination_missing": 0,
+    "boundary_uncertain": 0
+  },
+  "settlements": [
+    {
+      "settlement_id": "node_v1",
+      "name": "Betrawati",
+      "place_type": "village",
+      "coordinates": [
+        85.19992726194641,
+        28.01999621398887
+      ],
+      "snapped": true,
+      "snap_distance_m": 1108.2,
+      "status_overall": "already_disconnected",
+      "status_hospital": "already_disconnected",
+      "status_town": "already_disconnected",
+      "baseline_hospital_dist_km": null,
+      "post_hospital_dist_km": null,
+      "baseline_town_dist_km": null,
+      "post_town_dist_km": null
+    },
+    {
+      "settlement_id": "node_v2",
+      "name": "Bidur",
+      "place_type": "town",
+      "coordinates": [
+        85.14984936603577,
+        28.004996213988868
+      ],
+      "snapped": true,
+      "snap_distance_m": 1128.9,
+      "status_overall": "access_retained",
+      "status_hospital": "access_retained",
+      "status_town": "access_retained",
+      "baseline_hospital_dist_km": 0.0,
+      "post_hospital_dist_km": 0.0,
+      "baseline_town_dist_km": 0.0,
+      "post_town_dist_km": 0.0
+    }
+  ]
+}

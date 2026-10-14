@@ -1,0 +1,42 @@
+{
+  "aoi": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          85.12,
+          27.92
+        ],
+        [
+          85.28,
+          27.92
+        ],
+        [
+          85.28,
+          28.08
+        ],
+        [
+          85.12,
+          28.08
+        ],
+        [
+          85.12,
+          27.92
+        ]
+      ]
+    ]
+  },
+  "event_date": "2026-08-26",
+  "event_timezone": "Asia/Kathmandu",
+  "event_time": null,
+  "pre_search_days": 36,
+  "post_search_days": 24,
+  "pair_interval_days": 12,
+  "analysis_resolution_m": 20.0,
+  "osm_snapshot_time": null,
+  "routing_mode": "motor_vehicle",
+  "graph_context_buffer_m": 15000.0,
+  "copilot_enabled": true,
+  "segmentation_enabled": false,
+  "downstream_bonus_enabled": true
+}

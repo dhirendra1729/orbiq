@@ -1,0 +1,25 @@
+{
+  "run_id": "run_20261014_165946_2a3de6",
+  "frozen_at": "2026-10-14T16:59:59.064961+00:00",
+  "code_git_revision": "fc5d1a2ed3f9974f4ee8292a671c3c83042ebe62",
+  "config_sha256": "536b9360c94eb39dde64423832d5254f960bc3e17ba0dbdacd4bf2e0ae5ce2a1",
+  "derived_file_hashes": {
+    "derived/buildings_exposure.geojson": "265d0401e7ee1b28d1f4fc83babb12f08e5ad0e44f2661e4777bab48253a3bfb",
+    "derived/copernicus_dem.tif": "bd70fcf3b104449b8bc974f9f082beb31509818d18dc5d7b3c6143d05fa80487",
+    "derived/fused_hazard.geojson": "9653def9dd31767093db5b0ca620e4b6eef09f3b559feca5be9a6eab43bb46d5",
+    "derived/grid.json": "00e4b3f48ee8416320e8069a2bcd2d2909a2d500ed7406567264d7eb0fb26784",
+    "derived/roads_exposure.geojson": "15f14eff07baf3e48099c2a5fdeef0de000826ed377cba63b2169f91698b3580",
+    "derived/s1_inundation.geojson": "4eadae8887457c2ddd6793322147078615b1181deba4353e79e39682580cab2f",
+    "derived/s2_candidate_debris.geojson": "09418e31cf00d3da747bc851463ac617beb511ac463d36790a3abda10a9e4ba4",
+    "derived/settlement_access.json": "15dd5e6cc52ff02a24638e4dcc37a8b990d2de6230f02af2447f1cc3998b9bb2"
+  },
+  "status": "FROZEN_FOR_INDEPENDENT_CHECKING",
+  "allowed_inputs_declared": {
+    "sentinel_1_sar": "Copernicus Sentinel-1 SAR (IW mode, VV/VH, same relative orbit)",
+    "sentinel_2_opt": "Copernicus Sentinel-2 MSI (L2A bottom-of-atmosphere reflectance)",
+    "copernicus_dem": "Copernicus GLO-30 Digital Elevation Model",
+    "historical_osm": "Historical OpenStreetMap via ohsome API strictly prior to event timestamp"
+  },
+  "notice": "Predictions in this run are locked. No validation reference data has entered inference.",
+  "freeze_hash": "77de531347a94ac5b7eb5468c788e784c27eae83ff5fa7fc5f60abb95edc40ed"
+}
