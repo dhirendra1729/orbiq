@@ -1,0 +1,19 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [85.12, 27.92],
+        [85.28, 27.92],
+        [85.28, 28.08],
+        [85.12, 28.08],
+        [85.12, 27.92]
+      ]
+    ]
+  },
+  "properties": {
+    "name": "Trishuli River Basin, Nepal",
+    "description": "Case study domain for Track B August 2026 flood event"
+  }
+}

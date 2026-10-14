@@ -1,0 +1,126 @@
+{
+  "system_info": {
+    "os": "Linux x86_64",
+    "python_version": "3.11.16 (dedicated venv at backend/.venv)",
+    "node_version": "v22.23.3",
+    "npm_version": "12.2.0",
+    "branch": "track-b-satellite-damage",
+    "base_commit": "fc5d1a2ed3f9974f4ee8292a671c3c83042ebe62"
+  },
+  "gates": {
+    "G0": {
+      "name": "Base Inspection & Capability Inventory",
+      "status": "completed",
+      "notes": "Dedicated Python 3.11 venv initialized, all geospatial dependencies installed and verified (rasterio 1.4.4, geopandas 1.2.0, shapely 2.2.0, scipy 1.15.2, pyproj, networkx, pystac_client, fastapi, uvicorn)."
+    },
+    "G1": {
+      "name": "Schemas, Grid, Jobs/Store, Provenance & Health",
+      "status": "completed",
+      "notes": "Pydantic v2 schemas in schemas.py, atomic store and SQLite index in store.py, dynamic metric UTM grid generator in geo/grid.py, /api/track-b/health endpoint in api.py."
+    },
+    "G2": {
+      "name": "Sentinel-1 STAC Discovery & Same-Track Pairing",
+      "status": "completed",
+      "notes": "Discovery in providers/stac.py and pairing in providers/sentinel1.py enforcing same relative orbit, acquisition mode, polarization, and ~12-day repeat."
+    },
+    "G3": {
+      "name": "SAR Water & Change Detection (Otsu & Terrain Uncertainty)",
+      "status": "completed",
+      "notes": "Refined Lee speckle filtering in linear power, Otsu thresholding in dB space, 2D finite-difference slope mask (>20 deg) for radar shadow/layover exclusion in geo/flood.py and geo/masks.py."
+    },
+    "G4": {
+      "name": "Sentinel-2 Optical Corroboration & Candidate Debris",
+      "status": "completed",
+      "notes": "SCL cloud and invalid pixel masking in geo/masks.py, candidate debris delineation using delta-NDVI loss, SWIR bare-soil reflectance, and DEM valley flow corridors in geo/debris.py."
+    },
+    "G5": {
+      "name": "ohsome Historical OSM Ingestion & Road Network Topology",
+      "status": "completed",
+      "notes": "Historical pre-event geometry extraction with strict timestamp enforcement in providers/ohsome.py; multigraph topology preserving all connected components in geo/road_graph.py."
+    },
+    "G6": {
+      "name": "Asset Exposure Intersection (Buildings, Roads, Bridges)",
+      "status": "completed",
+      "notes": "Geometric intersection against fused hazard envelope; metric areas, segment lengths, unique ID tracking, and bridge inspection priorities in geo/exposure.py."
+    },
+    "G7": {
+      "name": "Pre/Post Access Connectivity & Cut-Off Settlements",
+      "status": "completed",
+      "notes": "NetworkX shortest path routing to hospitals and towns comparing baseline vs post-event optimistic and precautionary closure scenarios in geo/accessibility.py."
+    },
+    "G8": {
+      "name": "Deterministic Fact Store & Grounded Bilingual Copilot",
+      "status": "completed",
+      "notes": "Immutable server-side fact store in reports/facts.json, read-only typed tools in copilot/tools.py, Devanagari & English templates in copilot/templates.py, adversarial question refusal in copilot/validators.py."
+    },
+    "G9": {
+      "name": "Frontend Track B Studio, Evidence Dashboard & Exports",
+      "status": "completed",
+      "notes": "Dedicated React/Leaflet dashboard at frontend/src/app/track-b/page.tsx with multi-layer map, clicked-feature evidence panel, bilingual copilot, and printable HTML situation reports."
+    },
+    "G10": {
+      "name": "Trishuli Case Study Freeze & EMSR927 Checking",
+      "status": "completed",
+      "notes": "Completed end-to-end run run_20261014_165946_2a3de6 on Trishuli August 2026 event. Prediction frozen with SHA-256 hash 77de531347a94ac5b7eb5468c788e784c27eae83ff5fa7fc5f60abb95edc40ed. Quarantined validation runner in validation/emsr927.py."
+    },
+    "G11": {
+      "name": "DEM Downstream Flow Path Bonus & ML Pipeline Configs",
+      "status": "completed",
+      "notes": "D8 gravitational flow routing and downstream settlement corridor buffer in geo/downstream.py; isolated Kuro Siwo ML dataset and inference lane with honest model_unavailable handling in ml/infer.py."
+    },
+    "G12": {
+      "name": "Documentation, <=6-page Report, Video Script & Final Rehearsal",
+      "status": "completed",
+      "notes": "submission_report.md (exact 6-page allocation), demo_script.md (180s storyboard), demo_recording_checklist.md, case_study.md, limitations.md, scripts/track_b_doctor.sh, scripts/track_b_demo.sh."
+    }
+  },
+  "tests": {
+    "total": 29,
+    "passed": 29,
+    "failed": 0,
+    "test_files": [
+      "backend/tests/track_b/test_schemas_and_time.py",
+      "backend/tests/track_b/test_pairing_and_catalog.py",
+      "backend/tests/track_b/test_sar_and_optical.py",
+      "backend/tests/track_b/test_grid_and_masks.py",
+      "backend/tests/track_b/test_exposure_and_access.py",
+      "backend/tests/track_b/test_copilot_and_facts.py",
+      "backend/tests/track_b/test_leakage_and_freeze.py"
+    ]
+  },
+  "runs": [
+    {
+      "run_id": "run_20261014_165946_2a3de6",
+      "event_date": "2026-08-26",
+      "event_timezone": "Asia/Kathmandu",
+      "status": "completed",
+      "prediction_frozen": true,
+      "freeze_hash": "77de531347a94ac5b7eb5468c788e784c27eae83ff5fa7fc5f60abb95edc40ed",
+      "mapped_new_water_km2": 0.72,
+      "mapped_candidate_debris_km2": 71.29,
+      "exposed_roads_km": 2.39,
+      "exposed_buildings": 0,
+      "exposed_bridges": 1,
+      "cut_off_settlements": 0,
+      "facts_compiled": 8,
+      "artifacts": {
+        "derived": [
+          "buildings_exposure.geojson",
+          "copernicus_dem.tif",
+          "fused_hazard.geojson",
+          "grid.json",
+          "roads_exposure.geojson",
+          "s1_inundation.geojson",
+          "s2_candidate_debris.geojson",
+          "settlement_access.json"
+        ],
+        "reports": [
+          "facts.json",
+          "situation_report_en.html",
+          "situation_report_ne.html"
+        ],
+        "freeze": "prediction_freeze.json"
+      }
+    }
+  ]
+}
