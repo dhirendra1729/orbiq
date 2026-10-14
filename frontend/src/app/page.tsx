@@ -38,7 +38,22 @@ const InundationMapView = dynamic(
   },
 );
 
-type ViewId = "studio" | "map" | "verification" | "deliverables";
+const TrackBStudio = dynamic(
+  () => import("@/components/track-b/TrackBStudio"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-full w-full flex items-center justify-center bg-slate-950 text-slate-400">
+        <div className="space-y-3 text-center">
+          <Skeleton className="h-8 w-48 mx-auto" />
+          <p className="text-2xs text-content-subtle">Loading Orbiq Satellite Damage Studio...</p>
+        </div>
+      </div>
+    ),
+  },
+);
+
+type ViewId = "satellite" | "studio" | "map" | "verification" | "deliverables";
 
 interface NavItem {
   id: ViewId;
@@ -85,7 +100,7 @@ const BASEMAP_OPTIONS: SegmentedOption<BasemapId>[] = BASEMAP_IDS.map((id) => ({
   label: BASEMAPS[id].label,
 }));
 
-const VIEW_IDS = NAV.map((n) => n.id);
+const VIEW_IDS: ViewId[] = ["satellite", ...NAV.map((n) => n.id)];
 
 /**
  * Reads `?view=` off the address bar. Done through `window.location` rather
@@ -128,12 +143,22 @@ function useBackendHealth() {
 }
 
 export default function Home() {
-  const [view, setView] = useState<ViewId>("studio");
+  const [view, setView] = useState<ViewId>("satellite");
   const [basemap, setBasemap] = useState<BasemapId>("satellite");
   const [railOpen, setRailOpen] = useState(false);
   const backendOnline = useBackendHealth();
 
-  const active = NAV.find((n) => n.id === view) ?? NAV[0];
+  const active =
+    view === "satellite"
+      ? {
+          id: "satellite" as ViewId,
+          label: "Satellite Studio",
+          short: "Satellite",
+          icon: Satellite,
+          blurb:
+            "Post-event SAR and optical disaster extent, debris detection and road graph accessibility",
+        }
+      : NAV.find((n) => n.id === view) ?? NAV[0];
 
   // Adopt ?view= once, after mount, so a view can be linked to directly.
   useEffect(() => {
@@ -168,49 +193,85 @@ export default function Home() {
       {/* ------------------------------------------------------------------ */}
       <header className="shrink-0 h-14 px-4 sm:px-5 flex items-center justify-between gap-3 border-b border-edge bg-surface-sunken/90 backdrop-blur z-40">
         <div className="flex items-center gap-3 min-w-0">
-          <button
-            type="button"
-            onClick={() => setRailOpen((v) => !v)}
-            aria-expanded={railOpen}
-            aria-controls="primary-navigation"
-            aria-label={railOpen ? "Close navigation" : "Open navigation"}
-            className="lg:hidden h-10 w-10 -ml-1.5 flex items-center justify-center rounded text-content-muted hover:text-content hover:bg-white/5"
-          >
-            {railOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {view !== "satellite" && (
+            <button
+              type="button"
+              onClick={() => setRailOpen((v) => !v)}
+              aria-expanded={railOpen}
+              aria-controls="primary-navigation"
+              aria-label={railOpen ? "Close navigation" : "Open navigation"}
+              className="lg:hidden h-10 w-10 -ml-1.5 flex items-center justify-center rounded text-content-muted hover:text-content hover:bg-white/5"
+            >
+              {railOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          )}
 
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="h-8 w-8 shrink-0 rounded bg-brand-wash border border-brand/25 flex items-center justify-center">
-              <Satellite className="w-4 h-4 text-brand" aria-hidden />
+            <div className="h-8 w-8 shrink-0 rounded bg-sky-950/80 border border-sky-800/60 flex items-center justify-center text-sky-400 shadow-sm">
+              <Satellite className="w-4 h-4" aria-hidden />
             </div>
             <div className="min-w-0">
-              <h1 className="text-sm font-bold text-content tracking-tight leading-none">
-                Orbiq
-              </h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-sm font-bold text-content tracking-tight leading-none">
+                  Orbiq
+                </h1>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800/80">
+                  {view === "satellite" ? "Satellite Studio" : "Dam Solver"}
+                </span>
+              </div>
               <p className="text-2xs text-content-subtle leading-none mt-1 truncate">
-                Dam-Break Hydrodynamics · SIH26161 · NTRO
+                {view === "satellite"
+                  ? "Multimodal Earth Observation & Graph Access Intelligence"
+                  : "Dam-Break Hydrodynamics · 2D Shallow-Water Solver"}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="hidden sm:block">
-            <Segmented
-              label="Base map"
-              options={BASEMAP_OPTIONS}
-              value={basemap}
-              onChange={setBasemap}
-            />
-          </div>
-
-          <a
-            href="/track-b"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white shadow-sm transition shrink-0"
+        {/* Center Mode Switcher */}
+        <div className="flex items-center bg-surface-base/80 border border-edge rounded-lg p-0.5 shadow-sm">
+          <button
+            type="button"
+            onClick={() => selectView("satellite")}
+            className={cn(
+              "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-fast",
+              view === "satellite"
+                ? "bg-sky-600 text-white shadow-sm"
+                : "text-content-muted hover:text-content hover:bg-white/5"
+            )}
           >
             <Satellite className="w-3.5 h-3.5" />
-            <span>Track B Studio</span>
-          </a>
+            <span className="hidden sm:inline">🛰️ Satellite Damage Studio</span>
+            <span className="sm:hidden">🛰️ Satellite</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => selectView("studio")}
+            className={cn(
+              "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-fast",
+              view !== "satellite"
+                ? "bg-brand text-surface-base shadow-sm font-bold"
+                : "text-content-muted hover:text-content hover:bg-white/5"
+            )}
+          >
+            <Waves className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">🌊 2D Dam Solver</span>
+            <span className="sm:hidden">🌊 Dam Solver</span>
+          </button>
+        </div>
+
+        {/* Right Status & Controls */}
+        <div className="flex items-center gap-3 shrink-0">
+          {view !== "satellite" && (
+            <div className="hidden sm:block">
+              <Segmented
+                label="Base map"
+                options={BASEMAP_OPTIONS}
+                value={basemap}
+                onChange={setBasemap}
+              />
+            </div>
+          )}
 
           <div
             className="flex items-center gap-1.5 pl-3 border-l border-edge"
@@ -230,8 +291,8 @@ export default function Home() {
               {backendOnline === null
                 ? "Checking…"
                 : backendOnline
-                  ? "Solver online"
-                  : "Solver offline"}
+                  ? "Engine online"
+                  : "Engine offline"}
             </span>
           </div>
         </div>
@@ -239,66 +300,79 @@ export default function Home() {
 
       <div className="flex-1 flex min-h-0 relative">
         {/* ---------------------------------------------------------------- */}
-        {/* Navigation rail                                                   */}
+        {/* Navigation rail (only shown when in Dam Solver modes)            */}
         {/* ---------------------------------------------------------------- */}
-        <nav
-          id="primary-navigation"
-          aria-label="Workspace"
-          className={cn(
-            "absolute inset-y-0 left-0 z-30 w-64 shrink-0 flex-col border-r border-edge",
-            "bg-surface-sunken/95 backdrop-blur lg:static lg:flex lg:bg-surface-sunken/60",
-            "transition-transform duration lg:transition-none",
-            railOpen ? "flex translate-x-0" : "hidden -translate-x-full lg:flex lg:translate-x-0",
-          )}
-        >
-          <ul className="flex-1 overflow-y-auto fs-scroll p-3 space-y-1">
-            {NAV.map((item) => {
-              const Icon = item.icon;
-              const isActive = item.id === view;
-              return (
-                <li key={item.id}>
-                  <button
-                    type="button"
-                    onClick={() => selectView(item.id)}
-                    aria-current={isActive ? "page" : undefined}
-                    className={cn(
-                      "w-full flex items-start gap-3 rounded px-3 py-3 text-left min-h-11",
-                      "transition-colors duration-fast",
-                      isActive
-                        ? "bg-brand-wash text-brand border border-brand/25"
-                        : "text-content-muted border border-transparent hover:bg-white/5 hover:text-content",
-                    )}
-                  >
-                    <Icon className="w-4 h-4 mt-0.5 shrink-0" aria-hidden />
-                    <span className="min-w-0">
-                      <span className="block text-sm font-semibold leading-tight">
-                        {item.label}
-                      </span>
-                      <span
-                        className={cn(
-                          "block text-2xs leading-snug mt-1",
-                          isActive ? "text-brand/70" : "text-content-faint",
-                        )}
-                      >
-                        {item.blurb}
-                      </span>
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+        {view !== "satellite" && (
+          <nav
+            id="primary-navigation"
+            aria-label="Workspace"
+            className={cn(
+              "absolute inset-y-0 left-0 z-30 w-64 shrink-0 flex-col border-r border-edge",
+              "bg-surface-sunken/95 backdrop-blur lg:static lg:flex lg:bg-surface-sunken/60",
+              "transition-transform duration lg:transition-none",
+              railOpen ? "flex translate-x-0" : "hidden -translate-x-full lg:flex lg:translate-x-0",
+            )}
+          >
+            <div className="p-3 pb-1 border-b border-edge/60">
+              <button
+                type="button"
+                onClick={() => selectView("satellite")}
+                className="w-full flex items-center justify-center gap-2 rounded px-3 py-2 text-xs font-semibold text-sky-300 bg-sky-950/60 border border-sky-800/80 hover:bg-sky-900/50 transition-colors shadow-sm"
+              >
+                <Satellite className="w-3.5 h-3.5" />
+                <span>← Back to Satellite Studio</span>
+              </button>
+            </div>
 
-          <div className="shrink-0 p-3 border-t border-edge">
-            <p className="text-2xs text-content-faint leading-relaxed">
-              Bhuragaon reach, Brahmaputra
-              <br />
-              Raster extent 26.25–26.53° N, 92.00–92.55° E
-            </p>
-          </div>
-        </nav>
+            <ul className="flex-1 overflow-y-auto fs-scroll p-3 space-y-1">
+              {NAV.map((item) => {
+                const Icon = item.icon;
+                const isActive = item.id === view;
+                return (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      onClick={() => selectView(item.id)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "w-full flex items-start gap-3 rounded px-3 py-3 text-left min-h-11",
+                        "transition-colors duration-fast",
+                        isActive
+                          ? "bg-brand-wash text-brand border border-brand/25"
+                          : "text-content-muted border border-transparent hover:bg-white/5 hover:text-content",
+                      )}
+                    >
+                      <Icon className="w-4 h-4 mt-0.5 shrink-0" aria-hidden />
+                      <span className="min-w-0">
+                        <span className="block text-sm font-semibold leading-tight">
+                          {item.label}
+                        </span>
+                        <span
+                          className={cn(
+                            "block text-2xs leading-snug mt-1",
+                            isActive ? "text-brand/70" : "text-content-faint",
+                          )}
+                        >
+                          {item.blurb}
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
 
-        {railOpen && (
+            <div className="shrink-0 p-3 border-t border-edge">
+              <p className="text-2xs text-content-faint leading-relaxed">
+                Bhuragaon reach, Brahmaputra
+                <br />
+                Raster extent 26.25–26.53° N, 92.00–92.55° E
+              </p>
+            </div>
+          </nav>
+        )}
+
+        {railOpen && view !== "satellite" && (
           <button
             type="button"
             aria-label="Close navigation"
@@ -315,31 +389,39 @@ export default function Home() {
           className="flex-1 min-w-0 min-h-0 flex flex-col overflow-hidden"
         >
           {/* Compact view switcher for narrow screens, where the rail is hidden. */}
-          <div className="lg:hidden shrink-0 border-b border-edge bg-surface-sunken/60 px-2 overflow-x-auto fs-scroll">
-            <div className="flex items-center gap-1 min-w-max">
-              {NAV.map((item) => {
-                const isActive = item.id === view;
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => selectView(item.id)}
-                    aria-current={isActive ? "page" : undefined}
-                    className={cn(
-                      "h-11 px-3 text-xs font-medium whitespace-nowrap border-b-2 transition-colors duration-fast",
-                      isActive
-                        ? "border-brand text-brand"
-                        : "border-transparent text-content-subtle hover:text-content",
-                    )}
-                  >
-                    {item.short}
-                  </button>
-                );
-              })}
+          {view !== "satellite" && (
+            <div className="lg:hidden shrink-0 border-b border-edge bg-surface-sunken/60 px-2 overflow-x-auto fs-scroll">
+              <div className="flex items-center gap-1 min-w-max">
+                {NAV.map((item) => {
+                  const isActive = item.id === view;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => selectView(item.id)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "h-11 px-3 text-xs font-medium whitespace-nowrap border-b-2 transition-colors duration-fast",
+                        isActive
+                          ? "border-brand text-brand"
+                          : "border-transparent text-content-subtle hover:text-content",
+                      )}
+                    >
+                      {item.short}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="flex-1 min-h-0 overflow-hidden animate-fade-up" key={view}>
+          <div className="flex-1 min-h-0 overflow-hidden" key={view}>
+            {view === "satellite" && (
+              <TrackBStudio
+                embedded={true}
+                onSwitchMode={(mode) => selectView(mode as ViewId)}
+              />
+            )}
             {view === "studio" && <DamBreakStudio />}
             {view === "map" && <InundationMapView basemap={basemap} />}
             {view === "verification" && <VerificationView />}

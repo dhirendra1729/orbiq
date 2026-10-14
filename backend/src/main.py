@@ -49,7 +49,7 @@ def read_root():
     index_path = os.path.join(STATIC_DIR, "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)
-    return {"message": "FloodShield SIH26161 Hydrodynamic API is active"}
+    return {"message": "Orbiq SIH26161 Hydrodynamic API is active"}
 
 @app.get("/api/health")
 def health_check():

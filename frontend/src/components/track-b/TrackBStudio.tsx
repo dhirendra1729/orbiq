@@ -22,6 +22,7 @@ import CopilotPanel from "./CopilotPanel";
 import ComparisonPanel from "./ComparisonPanel";
 import ReportDownloads from "./ReportDownloads";
 import EvidencePanel from "./EvidencePanel";
+import { cn } from "@/components/ui/cn";
 
 // Dynamic import for Leaflet map to ensure client-only rendering
 const DamageMap = dynamic(() => import("./DamageMap"), {
@@ -33,7 +34,12 @@ const DamageMap = dynamic(() => import("./DamageMap"), {
   )
 });
 
-export default function TrackBStudio() {
+interface TrackBStudioProps {
+  embedded?: boolean;
+  onSwitchMode?: (mode: string) => void;
+}
+
+export default function TrackBStudio({ embedded = false, onSwitchMode }: TrackBStudioProps) {
   const [currentRunId, setCurrentRunId] = useState<string | null>(null);
   const [runStatus, setRunStatus] = useState<any>(null);
   const [isRunning, setIsRunning] = useState(false);
@@ -47,6 +53,26 @@ export default function TrackBStudio() {
   const [settlementsData, setSettlementsData] = useState<any[]>([]);
   const [downstreamData, setDownstreamData] = useState<any>(null);
   const [selectedFeature, setSelectedFeature] = useState<{ type: string; data: any } | null>(null);
+
+  // Automatically load the latest completed case study run on mount so data is immediately visible
+  useEffect(() => {
+    const loadInitialCaseStudy = async () => {
+      try {
+        const res = await fetch("/api/track-b/runs/run_20261014_165946_2a3de6");
+        if (res.ok) {
+          const data = await res.json();
+          if (data && (data.status === "completed" || data.status === "reporting")) {
+            setCurrentRunId(data.run_id);
+            setRunStatus(data);
+            fetchLayers(data.run_id);
+          }
+        }
+      } catch (err) {
+        console.warn("Could not load initial case study run:", err);
+      }
+    };
+    loadInitialCaseStudy();
+  }, []);
 
   // Poll run status
   useEffect(() => {
@@ -157,54 +183,82 @@ export default function TrackBStudio() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      {/* Top Header */}
-      <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md px-6 py-3 flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-sky-950 border border-sky-800 text-sky-400">
-            <Satellite className="w-5 h-5" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-base font-bold text-slate-100 tracking-wide">
-                Orbiq Track B
-              </h1>
-              <span className="text-[10px] px-2 py-0.5 rounded font-mono bg-sky-950 text-sky-300 border border-sky-800">
-                Satellite Damage & Access Intelligence
-              </span>
+    <div
+      className={cn(
+        "bg-slate-950 text-slate-100 flex flex-col font-sans",
+        embedded ? "h-full overflow-y-auto fs-scroll" : "min-h-screen"
+      )}
+    >
+      {/* Top Header - only rendered when viewing standalone /track-b */}
+      {!embedded && (
+        <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md px-6 py-3 flex items-center justify-between sticky top-0 z-50">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-sky-950 border border-sky-800 text-sky-400">
+              <Satellite className="w-5 h-5" />
             </div>
-            <div className="text-xs text-slate-400">
-              Multimodal AI Hackathon 2026 • Post-Event Earth Observation & Graph Access Studio
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-base font-bold text-slate-100 tracking-wide">
+                  Orbiq Track B
+                </h1>
+                <span className="text-[10px] px-2 py-0.5 rounded font-mono bg-sky-950 text-sky-300 border border-sky-800">
+                  Satellite Damage & Access Intelligence
+                </span>
+              </div>
+              <div className="text-xs text-slate-400">
+                Multimodal AI Hackathon 2026 • Post-Event Earth Observation & Graph Access Studio
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Status Pills */}
-        <div className="flex items-center gap-2 text-xs">
-          {runStatus && (
-            <div className="flex items-center gap-2 px-3 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[11px]">
-              <span className="text-slate-500">Run:</span>
-              <span className="text-sky-300 font-semibold">{runStatus.run_id}</span>
-              <span className="text-slate-600">|</span>
-              <span className="text-slate-400">Stage:</span>
-              <span className="text-amber-300 font-medium">{runStatus.current_stage}</span>
-            </div>
-          )}
-          <a
-            href="/"
-            className="text-xs px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
-          >
-            Dam Studio
-          </a>
-        </div>
-      </header>
+          {/* Status Pills & Switcher */}
+          <div className="flex items-center gap-2 text-xs">
+            {runStatus && (
+              <div className="flex items-center gap-2 px-3 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[11px]">
+                <span className="text-slate-500">Run:</span>
+                <span className="text-sky-300 font-semibold">{runStatus.run_id}</span>
+                <span className="text-slate-600">|</span>
+                <span className="text-slate-400">Stage:</span>
+                <span className="text-amber-300 font-medium">{runStatus.current_stage}</span>
+              </div>
+            )}
+            {onSwitchMode ? (
+              <button
+                type="button"
+                onClick={() => onSwitchMode("studio")}
+                className="text-xs px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
+              >
+                Dam Solver
+              </button>
+            ) : (
+              <a
+                href="/?view=studio"
+                className="text-xs px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
+              >
+                Dam Studio
+              </a>
+            )}
+          </div>
+        </header>
+      )}
 
       {/* Educational Disclaimer Banner */}
-      <div className="bg-amber-950/40 border-b border-amber-900/60 px-6 py-1.5 text-[11px] text-amber-300 flex items-center gap-2">
-        <ShieldAlert className="w-3.5 h-3.5 shrink-0 text-amber-400" />
-        <span>
-          <strong>EDUCATIONAL PROTOTYPE:</strong> Post-event assessment system adhering strictly to pre-event OSM and same-track SAR baselines. Does not prove structural bridge destruction or provide minutes-ahead evacuation warnings.
-        </span>
+      <div className="bg-amber-950/40 border-b border-amber-900/60 px-6 py-2 text-[11px] text-amber-300 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div className="flex items-center gap-2">
+          <ShieldAlert className="w-3.5 h-3.5 shrink-0 text-amber-400" />
+          <span>
+            <strong>EDUCATIONAL PROTOTYPE:</strong> Post-event assessment system adhering strictly to pre-event OSM and same-track SAR baselines. Does not prove structural bridge destruction or provide minutes-ahead evacuation warnings.
+          </span>
+        </div>
+        {embedded && runStatus && (
+          <div className="flex items-center gap-2 px-2.5 py-0.5 rounded bg-slate-900/90 border border-slate-800 text-slate-300 font-mono text-[11px] shrink-0">
+            <span className="text-slate-500">Active Run:</span>
+            <span className="text-sky-300 font-semibold">{runStatus.run_id}</span>
+            <span className="text-slate-600">•</span>
+            <span className="text-slate-400">Stage:</span>
+            <span className="text-amber-300 font-medium">{runStatus.current_stage}</span>
+          </div>
+        )}
       </div>
 
       {/* Main Workspace Layout */}
