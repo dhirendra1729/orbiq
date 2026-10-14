@@ -1,0 +1,120 @@
+# Environments & Secrets
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!.env.example
+!backend/.env.example
+.venv
+backend/.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.direnv/
+
+# Python & Testing
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+/lib/
+/lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+htmlcov/
+.coverage
+.tox/
+
+# Caches & Temporary Artifacts
+backend/cache/
+.cache/
+*.cache
+*.tmp.*
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDEs, System & Local Agents
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.agents/
+.gemini/
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Master Specifications & Heritage Planning Documents
+FloodShield_Track_B_MASTER*
+*FloodShield*.md*
+SIH26161_MASTER_IMPLEMENTATION_PLAN.md
+SIH26161_PLAN.md
+
+# Large GIS & Satellite Data
+backend/data/raw/
+backend/data/processed/
+backend/data/dem_cache/
+backend/data/dem/
+backend/data/anuga_runs/
+backend/data/track_b/runs/
+backend/data/track_b/cache/
+backend/data/track_b/jobs.db
+backend/data/track_b/jobs.db-journal
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.prj
+*.sww
+
+# Ignore massive TIFFs and GeoJSONs globally
+*.tif
+*.geojson
+
+# Allow essential project datasets and examples
+!frontend/public/data/
+!frontend/public/data/*.tif
+!frontend/public/data/*.geojson
+!frontend/public/data/*.png
+!backend/data/dam.geojson
+!examples/track_b/*.geojson
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Node dependencies and build output
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
