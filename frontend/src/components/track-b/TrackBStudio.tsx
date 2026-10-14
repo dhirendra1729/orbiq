@@ -143,14 +143,23 @@ export default function TrackBStudio({ embedded = false, onSwitchMode }: TrackBS
         body: JSON.stringify(formData)
       });
       if (!res.ok) {
-        const err = await res.json();
-        alert(`Failed to start run: ${err.detail || "Server error"}`);
+        let errDetail = `HTTP ${res.status}: ${res.statusText}`;
+        try {
+          const err = await res.json();
+          errDetail = err.detail || err.message || JSON.stringify(err);
+        } catch {
+          // Response was not JSON
+        }
+        alert(`Failed to start run: ${errDetail}`);
         setIsRunning(false);
         return;
       }
       const data = await res.json();
       setCurrentRunId(data.run_id);
       setRunStatus(data);
+      if (data.status === "completed" || data.status === "reporting") {
+        fetchLayers(data.run_id);
+      }
     } catch (e: any) {
       alert(`Error starting analysis: ${e.message || e}`);
       setIsRunning(false);
