@@ -46,7 +46,7 @@ def generate_situation_report_html(
 <html lang="{language}">
 <head>
   <meta charset="utf-8">
-  <title>FloodShield - {title}</title>
+  <title>Orbiq - {title}</title>
   <style>
     body {{
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -81,7 +81,7 @@ def generate_situation_report_html(
   <div class="header">
     <div>
       <span class="badge">TRACK B POST-EVENT ASSESSMENT</span>
-      <h1>FloodShield: {title}</h1>
+      <h1>Orbiq: {title}</h1>
       <div class="subtext">Run ID: <code>{run_id}</code> | Event: {req.event_date} ({req.event_timezone}) | Generated: {now_str}</div>
     </div>
   </div>

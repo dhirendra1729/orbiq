@@ -21,7 +21,7 @@ ENGLISH_TEMPLATES = {
         "and {rerouted_count} settlements require detours exceeding 10% of their baseline travel distance."
     ),
     "unsupported_casualty": (
-        "Scope Limitation: FloodShield does not model or estimate casualties, injured individuals, or population counts. "
+        "Scope Limitation: Orbiq does not model or estimate casualties, injured individuals, or population counts. "
         "Satellite footprint intersection identifies exposed physical infrastructure only, not building occupancy rates or casualties."
     ),
     "unsupported_destruction": (
@@ -29,7 +29,7 @@ ENGLISH_TEMPLATES = {
         "not confirmed structural collapse, bridge pier failure, or physical road impassability. Ground inspection is required."
     ),
     "unsupported_evacuation": (
-        "Operational Notice: FloodShield is an educational prototype and does not issue real-time evacuation orders "
+        "Operational Notice: Orbiq is an educational prototype and does not issue real-time evacuation orders "
         "or calculate dynamic minutes-ahead flood wave arrival times."
     )
 }

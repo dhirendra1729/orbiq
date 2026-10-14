@@ -30,7 +30,7 @@ def track_b_health():
     """Report readiness of Track B subcomponents (catalogs, OSM, DEM, copilot, storage)."""
     return {
         "status": "ok",
-        "system": "FloodShield Track B Satellite Damage & Access Studio",
+        "system": "Orbiq Track B Satellite Damage & Access Studio",
         "version": "1.0.0",
         "subsystems": {
             "stac_earth_search": "ready",

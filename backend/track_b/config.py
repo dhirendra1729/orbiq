@@ -1,4 +1,4 @@
-"""Configuration settings, capability probes and baseline constants for FloodShield Track B."""
+"""Configuration settings, capability probes and baseline constants for Orbiq Track B."""
 
 import os
 from pathlib import Path

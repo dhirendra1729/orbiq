@@ -185,7 +185,7 @@ export default function Home() {
             </div>
             <div className="min-w-0">
               <h1 className="text-sm font-bold text-content tracking-tight leading-none">
-                FloodShield
+                Orbiq
               </h1>
               <p className="text-2xs text-content-subtle leading-none mt-1 truncate">
                 Dam-Break Hydrodynamics · SIH26161 · NTRO

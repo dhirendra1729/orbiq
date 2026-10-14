@@ -1,4 +1,4 @@
-# FloodMapping 🛰️🌊
+# Orbiq 🛰️🌊
 
 **Multi-Sensor Satellite Flood Damage Mapping, Rescue Access Intelligence & Hydrodynamic Decision Studio**
 
@@ -15,9 +15,9 @@
 
 ## 📌 Executive Summary
 
-**FloodMapping** is an end-to-end Earth Observation and post-disaster spatial intelligence system designed for rapid flood damage assessment and rescue routing in complex Himalayan and river basin terrains.
+**Orbiq** is an end-to-end Earth Observation and post-disaster spatial intelligence system designed for rapid flood damage assessment and rescue routing in complex Himalayan and river basin terrains.
 
-When catastrophic flood events strike, cloud cover frequently blinds optical satellites, mountain topography creates radar shadows mimicking standing water, and road networks become impassable. FloodMapping addresses these challenges through a physically grounded, leak-proof Earth Observation and network topology pipeline:
+When catastrophic flood events strike, cloud cover frequently blinds optical satellites, mountain topography creates radar shadows mimicking standing water, and road networks become impassable. Orbiq addresses these challenges through a physically grounded, leak-proof Earth Observation and network topology pipeline:
 
 1. **Synthetic Aperture Radar (SAR) Invariants:** Rigid same-track (~12-day repeat) Sentinel-1 pair matching enforcing identical relative orbits, look angles, and acquisition modes to isolate genuine surface change.
 2. **Topographic Uncertainty Masking:** 2D finite-difference slope filtering (`> 20°`) using Copernicus GLO-30 DEM to eliminate radar shadow and layover false positives in steep mountain gorges.
@@ -142,17 +142,17 @@ python -m track_b.cli validate --run-id <run_id> --reference-dir data/track_b/va
 ## 🛰️ Core Methodological Principles
 
 ### 1. Same-Track Sentinel-1 Invariants
-Water surface mapping with Synthetic Aperture Radar in mountainous terrain is vulnerable to view-angle discrepancies. FloodMapping enforces four rigid pairing invariants:
+Water surface mapping with Synthetic Aperture Radar in mountainous terrain is vulnerable to view-angle discrepancies. Orbiq enforces four rigid pairing invariants:
 - **Same Relative Orbit & Direction:** Pre- and post-event acquisitions must share the same orbit number and flight direction (Ascending/Descending).
 - **Exact ~12-Day Interval:** Pre-event scene acquired ~12 days prior to post-event scene using the same spacecraft.
 - **Speckle Reduction:** Refined Lee filter executed in linear power space prior to dB transformation.
 - **Adaptive Thresholding:** Otsu bimodal segmentation in dB backscatter space combined with permanent baseline water subtraction.
 
 ### 2. Mountain Radar Shadow Exclusion
-Radar pulses cannot illuminate valley faces angled away from the line of sight, creating dark patches often misidentified as water. Using the Copernicus GLO-30 DEM, FloodMapping calculates a 2D finite-difference slope mask. All pixels with `slope > 20°` are flagged as **terrain uncertainty** and excluded from flood classification.
+Radar pulses cannot illuminate valley faces angled away from the line of sight, creating dark patches often misidentified as water. Using the Copernicus GLO-30 DEM, Orbiq calculates a 2D finite-difference slope mask. All pixels with `slope > 20°` are flagged as **terrain uncertainty** and excluded from flood classification.
 
 ### 3. Sentinel-2 Candidate Debris Delineation
-Floods in high-gradient mountain rivers transport massive mud and sediment loads. Water-only detectors miss these destructive deposits. FloodMapping computes:
+Floods in high-gradient mountain rivers transport massive mud and sediment loads. Water-only detectors miss these destructive deposits. Orbiq computes:
 - $\text{NDVI} = \frac{\text{NIR} - \text{Red}}{\text{NIR} + \text{Red}}$
 - $\Delta\text{NDVI} = \text{NDVI}_{\text{post}} - \text{NDVI}_{\text{pre}} < -0.25$ (vegetation loss)
 - SWIR bare-soil reflectance $> 0.15$
@@ -160,10 +160,10 @@ Floods in high-gradient mountain rivers transport massive mud and sediment loads
 Areas meeting these criteria outside standing water are classified as **Candidate Debris**.
 
 ### 4. Anti-Leakage Historical OpenStreetMap
-Standard routing libraries use live OSM data, which frequently incorporates post-event edits (e.g., users marking damaged bridges), contaminating post-event prediction. FloodMapping queries the HeiGIT **ohsome API** with an explicit timestamp strictly prior to the disaster date (e.g. `2026-07-27T09:00:00Z`).
+Standard routing libraries use live OSM data, which frequently incorporates post-event edits (e.g., users marking damaged bridges), contaminating post-event prediction. Orbiq queries the HeiGIT **ohsome API** with an explicit timestamp strictly prior to the disaster date (e.g. `2026-07-27T09:00:00Z`).
 
 ### 5. Road Network Access & Cut-Off Analysis
-Unlike standard routing engines that filter out disconnected graph components, FloodMapping builds a metric multigraph retaining all isolated components:
+Unlike standard routing engines that filter out disconnected graph components, Orbiq builds a metric multigraph retaining all isolated components:
 - **Baseline Connectivity:** Identifies shortest-path network distances to towns and hospitals before the event.
 - **Post-Event Scenarios:**
   - *Optimistic Policy:* Blocks at-grade road segments intersecting confident flood water or debris.
@@ -205,7 +205,7 @@ To ensure scientific integrity:
 ## 📁 Repository Structure
 
 ```text
-flood_mapping/
+orbiq/
 ├── backend/
 │   ├── track_b/                # Track B satellite damage mapping & access engine
 │   │   ├── schemas.py          # Pydantic v2 data contracts & request schemas
@@ -271,4 +271,4 @@ flood_mapping/
 > **© OpenStreetMap contributors.**  
 > **European Union, Copernicus Emergency Management Service data (for reference validation only).**
 
-**Important Educational Prototype Notice:** FloodMapping is an educational post-event assessment research prototype. Satellite spatial intersection identifies physical infrastructure exposure, not confirmed structural destruction, road passability, or operational hospital status. FloodMapping does not generate casualty or population displacement estimates, nor does it issue operational evacuation commands.
+**Important Educational Prototype Notice:** Orbiq is an educational post-event assessment research prototype. Satellite spatial intersection identifies physical infrastructure exposure, not confirmed structural destruction, road passability, or operational hospital status. Orbiq does not generate casualty or population displacement estimates, nor does it issue operational evacuation commands.

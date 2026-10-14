@@ -16,12 +16,12 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "FloodShield — Dam Break Hydrodynamic Modelling",
-    template: "%s · FloodShield",
+    default: "Orbiq — Satellite Flood Damage Mapping & Hydrodynamic Intelligence",
+    template: "%s · Orbiq",
   },
   description:
-    "Two-dimensional dam-break flood modelling and downstream inundation mapping for the Brahmaputra reach at Bhuragaon, Assam. SIH26161 — National Technical Research Organisation.",
-  applicationName: "FloodShield",
+    "Multi-sensor satellite flood damage mapping, rescue access intelligence, and hydrodynamic dam-break decision system.",
+  applicationName: "Orbiq",
   robots: { index: false, follow: false },
 };
 

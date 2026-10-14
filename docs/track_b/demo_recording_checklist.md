@@ -18,7 +18,7 @@ This checklist prepares the operator or automated screen recorder to capture the
 
 | Timestamp | Screen State / Action | Key Script Cue | Check |
 | :--- | :--- | :--- | :--- |
-| **0:00 – 0:20** | Show dashboard header, logo, and top amber educational banner. | "FloodShield Track B... educational post-event prototype" | [ ] |
+| **0:00 – 0:20** | Show dashboard header, logo, and top amber educational banner. | "Orbiq Track B... educational post-event prototype" | [ ] |
 | **0:20 – 0:50** | Click "Load Trishuli Preset". Show S1 same-track pairing and ohsome pre-event cutoff date. | "Sentinel-1 pass 85 ascending... exactly 12 days apart" | [ ] |
 | **0:50 – 1:20** | Show damage map with blue flood inundation and amber candidate debris. Click a building to open Feature Inspector. | "Slopes > 20 deg slope-masked... candidate debris via S2 optical" | [ ] |
 | **1:20 – 1:50** | Switch to "Cut-off Access" tab. Click Betrawati in the table; show hospital route. | "Shortest network paths to nearest hospital before and after" | [ ] |

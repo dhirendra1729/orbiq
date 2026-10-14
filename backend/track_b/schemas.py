@@ -1,4 +1,4 @@
-"""Pydantic schemas and typed data contracts for FloodShield Track B."""
+"""Pydantic schemas and typed data contracts for Orbiq Track B."""
 
 from datetime import date, datetime
 from enum import Enum

@@ -25,8 +25,8 @@ export default function CopilotPanel({ runId, scenario = "precautionary" }: Copi
       role: "assistant",
       content:
         language === "ne"
-          ? "नमस्ते! म फ्लडसिल्ड एआई कोपाइलट हुँ। यो विश्लेषण रनको बाढी, पूर्वाधार जोखिम, र सम्पर्कविहीन बस्तीबारे सोध्न सक्नुहुन्छ।"
-          : "Hello! I am the FloodShield Situation Copilot. Ask me about mapped flood extent, exposed infrastructure, or cut-off settlements for this run."
+          ? "नमस्ते! म अर्बिक (Orbiq) एआई कोपाइलट हुँ। यो विश्लेषण रनको बाढी, पूर्वाधार जोखिम, र सम्पर्कविहीन बस्तीबारे सोध्न सक्नुहुन्छ।"
+          : "Hello! I am the Orbiq Situation Copilot. Ask me about mapped flood extent, exposed infrastructure, or cut-off settlements for this run."
     }
   ]);
   const [isLoading, setIsLoading] = useState(false);

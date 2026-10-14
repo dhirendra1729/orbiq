@@ -1,4 +1,4 @@
-# FloodShield Track B: Satellite Flood Damage Mapping and Rescue Access Intelligence
+# Orbiq Track B: Satellite Flood Damage Mapping and Rescue Access Intelligence
 ## Final Technical Submission Report
 
 **Track:** Multimodal AI Hackathon 2026 - Track B: Mapping Flood Damage from Space  
@@ -17,7 +17,7 @@ Following sudden monsoon flash floods or glacier-lake outburst floods (GLOFs) in
 3. Critical road corridors and river bridges are washed out, severing access to regional hospitals.
 4. Large Language Models (LLMs) hallucinate casualty numbers, collapse proofs, or evacuation timings if unconstrained.
 
-FloodShield addresses these challenges through a **physically grounded, leak-proof Earth Observation and network topology pipeline**:
+Orbiq addresses these challenges through a **physically grounded, leak-proof Earth Observation and network topology pipeline**:
 - Sentinel-1 SAR change detection with strict same-track pairing (~12-day repeat).
 - Strict pre-event OpenStreetMap extraction via ohsome to prevent post-disaster mapping contamination.
 - Before/after road graph accessibility analysis retaining all connected components.
@@ -33,7 +33,7 @@ To guarantee analytical integrity and comply with competition rules:
 ### Page 2: Satellite Processing: Same-Track Radar & Multimodal Debris
 
 #### 2.1 Sentinel-1 Same-Track Invariants
-Radar backscatter change detection across mountain terrain requires identical satellite incidence angles and look directions. FloodShield enforces four strict invariants:
+Radar backscatter change detection across mountain terrain requires identical satellite incidence angles and look directions. Orbiq enforces four strict invariants:
 1. Pre-event scene acquired strictly before event date ($T_{\text{pre}} < T_{\text{event}}$).
 2. Post-event scene acquired at/after event ($T_{\text{post}} \ge T_{\text{event}}$).
 3. Matched relative orbit and orbit direction (e.g. Track 85 Ascending).
@@ -52,13 +52,13 @@ Using Copernicus GLO-30 DEM, finite-difference 2D gradients calculate terrain sl
 ### Page 3: Historical Infrastructure & Graph Accessibility Topology
 
 #### 3.1 Historical Pre-Event OpenStreetMap (ohsome)
-Live OSM queries (e.g. live OSMnx) are strictly prohibited because post-event community edits leak damage information. FloodShield queries the HeiGIT ohsome `/elements/geometry` endpoint with an explicit historical timestamp set prior to event occurrence (e.g. `2026-07-27T09:00:00Z`).
+Live OSM queries (e.g. live OSMnx) are strictly prohibited because post-event community edits leak damage information. Orbiq queries the HeiGIT ohsome `/elements/geometry` endpoint with an explicit historical timestamp set prior to event occurrence (e.g. `2026-07-27T09:00:00Z`).
 
 #### 3.2 Road Graph Reconstruction
 Extracted road ways are converted to a metric projected graph (UTM Zone 45N):
 - Shared endpoints are resolved within a 3.0 m metric tolerance.
 - Bridge layer tags (`bridge=yes`, `layer=*`) are preserved to prevent planar crossings from creating false intersections.
-- **Component Preservation:** Unlike traditional routing tools that discard isolated nodes, FloodShield preserves all graph components to assess cut-off communities.
+- **Component Preservation:** Unlike traditional routing tools that discard isolated nodes, Orbiq preserves all graph components to assess cut-off communities.
 
 #### 3.3 Two Access Policy Scenarios
 1. **Optimistic Scenario:** Confidently flooded at-grade segments closed; elevated bridge decks treated as open.
@@ -71,7 +71,7 @@ For each settlement, baseline shortest paths to the nearest town and hospital ar
 ### Page 4: Graded AI: Tool-Grounded Bilingual Situation Copilot
 
 #### 4.1 Architecture & Number Safety
-FloodShield selects the **Bilingual Situation Copilot** as the primary graded AI deliverable:
+Orbiq selects the **Bilingual Situation Copilot** as the primary graded AI deliverable:
 - Rather than unconstrained text generation, the copilot executes typed, read-only tools querying an immutable server-side fact store (`facts.json`).
 - All numeric measurements (areas, lengths, counts, detour ratios, dates) are rendered directly into verified templates.
 - **Adversarial Question Guards:** Questions soliciting casualty numbers, structural collapse guarantees, or real-time evacuation orders are intercepted by rule-based validators and answered with explicit system limitation statements.

@@ -21,7 +21,7 @@ from track_b.validation.emsr927 import compare_with_emsr927
 def cmd_doctor():
     """Diagnostic system health check reporting tool and provider readiness."""
     print("=" * 60)
-    print(" FloodShield Track B Doctor: Environment & Capabilities")
+    print(" Orbiq Track B Doctor: Environment & Capabilities")
     print("=" * 60)
 
     # 1. Python environment
@@ -110,7 +110,7 @@ def cmd_validate(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="FloodShield Track B CLI")
+    parser = argparse.ArgumentParser(description="Orbiq Track B CLI")
     subparsers = parser.add_subparsers(dest="command")
 
     # doctor

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# FloodShield - Dam Break Hydrodynamic Modeling System (SIH26161 NTRO)
+# Orbiq - Hydrodynamic & Satellite Disaster Intelligence System
 # Single startup runner for both FastAPI backend and Next.js frontend
 # ==============================================================================
 
@@ -16,8 +16,8 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "${CYAN}====================================================================${NC}"
-echo -e "${CYAN}           FloodShield — Hydrodynamic Dam Break Suite                ${NC}"
-echo -e "${CYAN}       Problem Statement: SIH26161 | Sponsoring Org: NTRO           ${NC}"
+echo -e "${CYAN}              Orbiq — Satellite & Hydrodynamic Suite                ${NC}"
+echo -e "${CYAN}       Track B Satellite Intelligence | Hydrodynamic Studio         ${NC}"
 echo -e "${CYAN}====================================================================${NC}"
 
 # 1. Locate Python Environment
@@ -70,7 +70,7 @@ free_port() {
 
 # Cleanup handler for graceful shutdown
 cleanup() {
-    echo -e "\n${YELLOW}Shutting down FloodShield services...${NC}"
+    echo -e "\n${YELLOW}Shutting down Orbiq services...${NC}"
     if [ -n "$BACKEND_PID" ]; then
         kill "$BACKEND_PID" 2>/dev/null || true
     fi
@@ -123,9 +123,10 @@ fi
 echo -e "${GREEN}[3/3] Starting Next.js Mission Control Dashboard on port 3000...${NC}"
 echo -e ""
 echo -e "${CYAN}--------------------------------------------------------------------${NC}"
-echo -e "${GREEN}  FloodShield Dashboard: ${NC}http://localhost:3000"
+echo -e "${GREEN}  Orbiq Track B Studio:  ${NC}http://localhost:3000/track-b"
+echo -e "${GREEN}  Orbiq Dam Studio:      ${NC}http://localhost:3000"
 echo -e "${GREEN}  Interactive API Docs:  ${NC}http://localhost:8000/docs"
-echo -e "${GREEN}  Health Status Check:   ${NC}http://localhost:8000/api/health"
+echo -e "${GREEN}  Track B Health Check:  ${NC}http://localhost:8000/api/track-b/health"
 echo -e "${CYAN}--------------------------------------------------------------------${NC}"
 echo -e "${YELLOW}Press Ctrl+C to stop all services.${NC}"
 echo -e ""

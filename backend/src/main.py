@@ -27,7 +27,7 @@ except Exception:
 
 from track_b.api import router as track_b_router
 
-app = FastAPI(title="FloodShield - Dam Break Hydrodynamic System (SIH26161 NTRO)")
+app = FastAPI(title="Orbiq - Hydrodynamic & Satellite Disaster Intelligence System")
 app.include_router(track_b_router)
 
 

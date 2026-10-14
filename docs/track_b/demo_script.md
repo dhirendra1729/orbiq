@@ -8,9 +8,9 @@
 ## Storyboard & Timing Ledger
 
 ### Segment 1: Introduction & Problem Scope (0:00 – 0:20 | 20s)
-- **Visual:** FloodShield Track B Dashboard loaded on browser (`http://localhost:3000/track-b`). Top disclaimer banner visible: *Educational prototype — post-event assessment only*.
+- **Visual:** Orbiq Track B Dashboard loaded on browser (`http://localhost:3000/track-b`). Top disclaimer banner visible: *Educational prototype — post-event assessment only*.
 - **Voiceover:**
-  > "Welcome to FloodShield Track B: Satellite Flood Damage Mapping and Rescue Access Intelligence.
+  > "Welcome to Orbiq Track B: Satellite Flood Damage Mapping and Rescue Access Intelligence.
   > Following sudden Himalayan monsoon flash floods, rescue coordinators face immediate uncertainty: where is the flood water, what roads or bridges are cut off, and which remote villages have lost access to hospitals?
   > We built an educational post-event assessment system that pairs real satellite radar and optical imagery with historical OpenStreetMap to answer these questions."
 
@@ -65,4 +65,4 @@
 - **Visual:** Click upstream on the map. Violet downstream drainage path traces along the river basin. Footer displays mandatory Copernicus and OpenStreetMap attributions.
 - **Voiceover:**
   > "As a bonus, clicking any upstream seed traces the D8 gravitational drainage path along the DEM, listing downstream settlements in order of proximity.
-  > FloodShield: verifiable Earth observation, historical infrastructure topology, and honest bilingual AI intelligence from space."
+  > Orbiq: verifiable Earth observation, historical infrastructure topology, and honest bilingual AI intelligence from space."

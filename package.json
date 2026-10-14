@@ -1,7 +1,7 @@
 {
-  "name": "floodshield",
+  "name": "orbiq",
   "version": "1.0.0",
-  "description": "Dam Break Inundation Modeling Using Hydrodynamic Modeling (SIH26161 NTRO)",
+  "description": "Orbiq: Multi-Sensor Satellite Flood Damage Mapping, Rescue Access Intelligence & Hydrodynamic Decision Studio",
   "scripts": {
     "start": "./start.sh",
     "dev": "./start.sh",

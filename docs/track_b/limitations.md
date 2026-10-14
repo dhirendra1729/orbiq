@@ -1,6 +1,6 @@
 # Track B: System Scope, Physical Assumptions & Operational Limitations
 
-> **CRITICAL NOTICE:** FloodShield Track B is an **educational post-event damage mapping and rescue access intelligence prototype**. It is **not** an operational evacuation, real-time life-safety dispatch, or minutes-ahead disaster warning system.
+> **CRITICAL NOTICE:** Orbiq Track B is an **educational post-event damage mapping and rescue access intelligence prototype**. It is **not** an operational evacuation, real-time life-safety dispatch, or minutes-ahead disaster warning system.
 
 ---
 
@@ -28,5 +28,5 @@
 
 1. **Fact-Store Grounding:** The English and Nepali situation copilot queries a deterministic, server-side fact store. It does not possess direct perceptual capabilities beyond registered run facts.
 2. **Language Fluency & Translation Nuance:** While Nepali templates and formatting preserve exact numeric metrics and place names in original Devanagari script, automated language generation can exhibit phrasing variances and requires local reviewer validation.
-3. **Checking Reference Discrepancies:** Copernicus EMS (EMSR927) products were delineated at specific satellite acquisition times with different spatial resolutions and sensor geometries. Spatial divergence between FloodShield predictions and EMS reference vectors reflects sensor, temporal, and methodological differences, not ground-truth errors.
+3. **Checking Reference Discrepancies:** Copernicus EMS (EMSR927) products were delineated at specific satellite acquisition times with different spatial resolutions and sensor geometries. Spatial divergence between Orbiq predictions and EMS reference vectors reflects sensor, temporal, and methodological differences, not ground-truth errors.
 4. **Downstream Terrain Flow Bonus:** The D8 flow accumulation corridor from an upstream point indicates gravitational drainage terrain paths; it does not model hydrodynamics, sediment transport, breach hydrographs, or flood wave arrival velocities.

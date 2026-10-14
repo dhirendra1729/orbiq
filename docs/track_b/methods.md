@@ -1,6 +1,6 @@
 # Track B: Technical Methodology & Scientific Pipeline
 
-This document outlines the algorithms, formulas, and processing steps implemented in FloodShield Track B.
+This document outlines the algorithms, formulas, and processing steps implemented in Orbiq Track B.
 
 ---
 

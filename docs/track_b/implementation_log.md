@@ -1,6 +1,6 @@
 # Track B Implementation Log: Satellite Flood Damage Mapping and Rescue Access Intelligence
 
-**Repository:** https://github.com/dhirendra1729/FloodShield  
+**Repository:** https://github.com/dhirendra1729/Orbiq  
 **Base Commit Inspected:** `fc5d1a2ed3f9974f4ee8292a671c3c83042ebe62`  
 **Active Working Branch:** `track-b-satellite-damage`  
 **Session Date:** 2026-10-14  

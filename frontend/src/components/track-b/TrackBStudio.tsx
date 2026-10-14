@@ -167,7 +167,7 @@ export default function TrackBStudio() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-bold text-slate-100 tracking-wide">
-                FloodShield Track B
+                Orbiq Track B
               </h1>
               <span className="text-[10px] px-2 py-0.5 rounded font-mono bg-sky-950 text-sky-300 border border-sky-800">
                 Satellite Damage & Access Intelligence

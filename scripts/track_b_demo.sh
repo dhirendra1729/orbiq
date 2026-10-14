@@ -11,7 +11,7 @@ else
 fi
 
 echo "============================================================"
-echo " FloodShield Track B: Demonstration & Rehearsal Pipeline"
+echo " Orbiq Track B: Demonstration & Rehearsal Pipeline"
 echo "============================================================"
 
 # 1. System Doctor Check
